@@ -1,6 +1,6 @@
 = thunderbucket
 
-Description goes here.
+See: http://gist.github.com/214893
 
 == Note on Patches/Pull Requests
  
