@@ -1,7 +1,42 @@
 = thunderbucket
 
-See: http://gist.github.com/214893
+Thunderbucket is an ORM for Key/Value stores. Yes, O*R*M. It does relations. Indexed attributes for searching too. Sexy, no?
 
+It's mad early beta software, when you find bugs, please let me know and if you're feeling especially generous, send me a pull request with a fix. ;)
+
+For some of the thoughts/goals behind TB: http://gist.github.com/214893
+
+== A delicious example
+
+	require 'thunderbucket'
+	
+	Thunderbucket.backend = :memory
+	# - or -
+	Thunderbucket.backend = [:redis, 'localhost']
+	
+	
+	class Drink < Thunderbucket::Base
+		belongs_to :person
+
+		attributes :alcohol_content
+	end
+	
+	class Person < Thunderbucket::Base
+	 	has_many :drinks
+
+		attributes :name, :city
+
+		indexed_attributes :name
+	end
+	
+	Person.find(1) # autoincrementing unique id's!
+	p = Person.find(:name=>'Adrian Pike')
+	p.drinks #=> [#<Drink id: 1, person_id: 1, alcohol_content:"0.05", created_at: "2009-10-10 21:40:26", updated_at: "2009-10-10 21:40:26">]
+	p.city #=> 'Bellingham'
+	p.city = 'Seattle'
+	p.save
+	
+	
 == Note on Patches/Pull Requests
  
 * Fork the project.

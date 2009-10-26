@@ -1,19 +1,16 @@
 module Thunderbucket
-	class Base
+	class ThunderbucketException < Exception; end
+	class NotFound < ThunderbucketException; end
 
-		class ThunderbucketException < Exception; end
-		class NotFound < ThunderbucketException; end
+	class Base
 
 		def initialize
 			@attribute_values = {}
+			@saved_attributes = {}
 		end
 
-		def self.initialize!
-			@@attributes = []
-		end
-		
-		def method_missing(method_id, *args, &block)
-			Thunderbucket.log("Missing method #{method_id.to_s}")
+		def backend
+			Thunderbucket.backend
 		end
 		
 	end
@@ -24,7 +21,5 @@ module Thunderbucket
 		include Finders
 		include Indexes
 		include Stores
-
-		initialize!
 	end
 end
