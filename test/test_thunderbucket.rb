@@ -1,28 +1,5 @@
 require 'helper'
 
-class Person < Thunderbucket::Base
- 	has_many :drinks
-  belongs_to :school
-	
-	attributes :name, :city
-	
-	index_attributes :name
-end
-
-class Drink < Thunderbucket::Base
-	belongs_to :person
-
-	attributes :alcohol_content
-end
-
-class School < Thunderbucket::Base
-	has_many :people
-
-	attributes :location, :motto
-
-	index_attributes :location
-end
-
 class TestThunderbucket < Test::Unit::TestCase
 	context 'an unbacked and empty store' do
 		setup do
@@ -139,12 +116,9 @@ class TestThunderbucket < Test::Unit::TestCase
 			assert_equal(str2, @load3.first.name)
 		end
 
-		should 'have associations' do
-		end
-		
 		should 'have created_at and updated_at' do
 		end
-
+		
 		should 'have chained deletions' do
 		end
 
@@ -155,6 +129,9 @@ class TestThunderbucket < Test::Unit::TestCase
 		end
 		
 		should 'have limitable results' do
+		end
+		
+		should 'have validations' do
 		end
 
 	end

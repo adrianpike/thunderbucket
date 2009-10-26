@@ -35,7 +35,11 @@ For some of the thoughts/goals behind TB: http://gist.github.com/214893
 	p.city #=> 'Bellingham'
 	p.city = 'Seattle'
 	p.save
-	
+
+== Uh... Why?
+
+* Key/value stores are easily partitioned for linear scaling.
+* NoSQL is so hot right now.
 	
 == Note on Patches/Pull Requests
  
